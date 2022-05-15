@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class SinglePageController {
-    @GetMapping("/**/{path:[^.]*}")
+//    @GetMapping("/**/{path:[^.]*}")
+    @GetMapping("/")
     public String any() {
+
+    	System.out.println("call api");
         return "forward:/index.html";
     }
 }

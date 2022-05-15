@@ -17,7 +17,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "startRewired": "react-app-rewired start",
-    "buildRewired": "react-app-rewired build"
+    "buildRewired": "react-app-rewired build",
+    "postbuild": "node ./postbuild.js"
   },
   "eslintConfig": {
     "extends": [
@@ -37,5 +38,9 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8080"
+  "proxy": "http://localhost:8080",
+  "devDependencies": {
+    "chart.js": "^3.7.1",
+    "react-chartjs-2": "^4.1.0"
+  }
 }
