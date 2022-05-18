@@ -1,25 +1,6 @@
 import React, { Component } from 'react'
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend,
-} from 'chart.js';
+import Chart from 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
-
-
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend
-);
-
 
 class App2 extends Component {
 
@@ -31,7 +12,7 @@ class App2 extends Component {
 
     componentWillMount() {
         console.log('componentWillMount')
-        fetch('http://localhost:8080/api/getSample', { method: 'GET' })
+        fetch('http://localhost:8080/api/getLifePlan', { method: 'GET' })
             .then(response => response.json())
             .then(responseData => {
                 this.setState({
@@ -51,7 +32,8 @@ class App2 extends Component {
                 <Bar data={datasetData}
                     width={300}
                     height={300}
-                    options={{ maintainAspectRatio: false, responsive: false }} />
+                    /*options={{ maintainAspectRatio: false, responsive: false }}*/
+                     />
             );
         } else {
             return (
