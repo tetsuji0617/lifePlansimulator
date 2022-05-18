@@ -14,10 +14,12 @@ import bean.ResponseBean;
 
 @RestController
 public class RestApiController {
+
 	@RequestMapping(value="/api/getSample", method = {RequestMethod.GET})
 	@ResponseBody
 	@CrossOrigin
 	public String receiveJsonSample() throws JsonProcessingException {
+
 		System.out.println("receiveJsonSamle()");
 
 		ResponseBean bean = new ResponseBean();
@@ -30,9 +32,20 @@ public class RestApiController {
 		dataset.setLabel("Dataset 1");
 		dataset.setData(data);
 		dataset.setBackgroundColor(backgroundColor);
+		dataset.setType("bar");
 
 		datasets[0] = dataset;
-		datasets[1] = dataset;
+
+		Dataset[] datasets2 = new Dataset[2];
+		Dataset dataset2 = new Dataset();
+		String[] data2 = {"100","100","100","100","100","1000","1000"};
+		String backgroundColor2 = "rgba(255, 99, 132, 0.5)";
+		dataset2.setLabel("Dataset 2");
+		dataset2.setData(data2);
+		dataset2.setBackgroundColor(backgroundColor2);
+		dataset2.setType("line");
+
+		datasets[1] = dataset2;
 
 		bean.setLabels(labels);
 		bean.setDatasets(datasets);
