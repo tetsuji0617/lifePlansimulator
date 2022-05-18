@@ -40,7 +40,7 @@ function chartJsSample() {
         ]
     }
 
-    return <Bar data={data} data={data}
+    return <Bar data={data}
   width={300}
   height={300}
   options={{ maintainAspectRatio: false, responsive: false }}/>

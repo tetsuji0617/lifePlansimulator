@@ -100,6 +100,10 @@ dependencies {
 
     // utilirty
     implementation('com.fasterxml.jackson.core:jackson-databind:2.13.2.2')
+    compileOnly('org.projectlombok:lombok:1.18.24')
+    annotationProcessor('org.projectlombok:lombok:1.18.24')
+    implementation('com.fasterxml.jackson.core:jackson-core:2.13.3')
+    implementation('com.fasterxml.jackson.core:jackson-databind:2.13.3')
 
     // test
     testImplementation('org.springframework.boot:spring-boot-starter-test:2.6.7')
@@ -124,7 +128,7 @@ task buildReact(type: YarnTask) {
     args = ['build', 'start']
 }
 
-build.dependsOn buildReact
+//build.dependsOn buildReact
 
 
 // GradleでEclipseプロジェクト用ファイルをを生成するときのTips
