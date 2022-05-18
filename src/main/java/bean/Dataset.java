@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class Dataset {
 
+	String type;
+
 	String label;
 
 	String data[];
