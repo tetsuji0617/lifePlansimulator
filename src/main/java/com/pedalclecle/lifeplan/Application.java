@@ -1,4 +1,4 @@
-package com.pedalclecle.springboot;
+package com.pedalclecle.lifeplan;
 
 import java.util.Arrays;
 
