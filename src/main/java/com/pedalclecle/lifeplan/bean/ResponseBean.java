@@ -1,12 +1,18 @@
-package bean;
+package com.pedalclecle.lifeplan.bean;
 
 import lombok.Data;
 
 @Data
-public class ResponseBean2 {
+public class ResponseBean {
 
+	/**
+	 * グラフのラベル.
+	 */
 	Integer[] labels;
 
-	Dataset2[] datasets;
+	/**
+	 * グラフに表示するデータセット.
+	 */
+	Dataset[] datasets;
 
 }

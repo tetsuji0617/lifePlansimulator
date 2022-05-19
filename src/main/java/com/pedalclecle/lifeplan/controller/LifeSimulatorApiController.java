@@ -1,4 +1,4 @@
-package com.pedalclecle.springboot;
+package com.pedalclecle.lifeplan.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import bean.Dataset2;
-import bean.ResponseBean2;
+import com.pedalclecle.lifeplan.bean.Dataset;
+import com.pedalclecle.lifeplan.bean.ResponseBean;
 
 @RestController
 public class LifeSimulatorApiController {
@@ -28,7 +27,11 @@ public class LifeSimulatorApiController {
 		int retirementAge = 60;
 		int assets = 1000;
 
-		System.out.println("receiveJsonSamle()");
+		String backgroundColor = "rgba(99, 255, 99, 0.5)";
+		String backgroundColor2 = "rgba(255, 99, 132, 0.5)";
+
+
+		System.out.println("receiveJsonSamleあああああああああああ()");
 
 		List<Integer> labelsList = new ArrayList<Integer>();
 		List<Integer> dataList1 = new ArrayList<Integer>();
@@ -46,13 +49,12 @@ public class LifeSimulatorApiController {
 			dataList1.add(assets);
 		}
 
-		ResponseBean2 bean = new ResponseBean2();
+		ResponseBean bean = new ResponseBean();
 		Integer[] labels = labelsList.toArray(new Integer[labelsList.size()]);
 
-		Dataset2[] datasets = new Dataset2[2];
-		Dataset2 dataset = new Dataset2();
+		Dataset[] datasets = new Dataset[2];
+		Dataset dataset = new Dataset();
 		Integer[] data = dataList1.toArray(new Integer[dataList1.size()]);
-		String backgroundColor = "rgba(255, 99, 132, 0.5)";
 		dataset.setLabel("Dataset 1");
 		dataset.setData(data);
 		dataset.setBackgroundColor(backgroundColor);
@@ -60,10 +62,9 @@ public class LifeSimulatorApiController {
 
 		datasets[0] = dataset;
 
-		Dataset2[] datasets2 = new Dataset2[2];
-		Dataset2 dataset2 = new Dataset2();
+		Dataset[] datasets2 = new Dataset[2];
+		Dataset dataset2 = new Dataset();
 		Integer[] data2 = dataList2.toArray(new Integer[dataList2.size()]);
-		String backgroundColor2 = "rgba(255, 99, 132, 0.5)";
 		dataset2.setLabel("Dataset 2");
 		dataset2.setData(data2);
 		dataset2.setBackgroundColor(backgroundColor2);
