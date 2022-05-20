@@ -31,8 +31,6 @@ public class LifeSimulatorApiController {
 		String backgroundColor2 = "rgba(255, 99, 132, 0.5)";
 
 
-		System.out.println("receiveJsonSamleあああああああああああ()");
-
 		List<Integer> labelsList = new ArrayList<Integer>();
 		List<Integer> dataList1 = new ArrayList<Integer>();
 		List<Integer> dataList2 = new ArrayList<Integer>();

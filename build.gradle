@@ -128,12 +128,11 @@ task buildReact(type: YarnTask) {
     args = ['build', 'start']
 }
 
-//build.dependsOn buildReact
+build.dependsOn buildReact
 
 
 // GradleでEclipseプロジェクト用ファイルをを生成するときのTips
 // https://qiita.com/c9katayama/items/fd3d4028f8f6e97049f7
-
 eclipse.classpath.file {
     whenMerged { classpath ->
         classpath.entries.removeAll { entry -> (entry.path.endsWith('dll') || entry.path.endsWith('so') || entry.path.endsWith('dylib')) }
