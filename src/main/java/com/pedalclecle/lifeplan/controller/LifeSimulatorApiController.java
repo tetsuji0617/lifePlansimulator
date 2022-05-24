@@ -3,6 +3,7 @@ package com.pedalclecle.lifeplan.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,9 +14,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pedalclecle.lifeplan.bean.Dataset;
 import com.pedalclecle.lifeplan.bean.ResponseBean;
+import com.pedalclecle.lifeplan.service.IncomeTaxCalc;
 
 @RestController
 public class LifeSimulatorApiController {
+
+	@Autowired
+	IncomeTaxCalc incomeTaxCalc;
 
 	@RequestMapping(value="/api/getLifePlan", method = {RequestMethod.GET})
 	@ResponseBody
@@ -27,9 +32,10 @@ public class LifeSimulatorApiController {
 		int retirementAge = 60;
 		int assets = 1000;
 
-		String backgroundColor = "rgba(99, 255, 99, 0.5)";
-		String backgroundColor2 = "rgba(255, 99, 132, 0.5)";
+		String backgroundColor = "#63FF63";
+		String backgroundColor2 = "#ff6363";
 
+		incomeTaxCalc.calc(null);
 
 		List<Integer> labelsList = new ArrayList<Integer>();
 		List<Integer> dataList1 = new ArrayList<Integer>();
