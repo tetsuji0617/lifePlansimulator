@@ -35,7 +35,7 @@ public class LifeSimulatorApiController {
 		String backgroundColor = "#63FF63";
 		String backgroundColor2 = "#ff6363";
 
-		incomeTaxCalc.calc(null);
+		System.out.println(incomeTaxCalc.calc(361));
 
 		List<Integer> labelsList = new ArrayList<Integer>();
 		List<Integer> dataList1 = new ArrayList<Integer>();
