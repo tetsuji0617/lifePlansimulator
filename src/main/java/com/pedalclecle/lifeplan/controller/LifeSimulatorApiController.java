@@ -15,12 +15,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pedalclecle.lifeplan.bean.Dataset;
 import com.pedalclecle.lifeplan.bean.ResponseBean;
 import com.pedalclecle.lifeplan.service.IncomeTaxCalc;
+import com.pedalclecle.lifeplan.service.SalaryDeductionCalc;
 
 @RestController
 public class LifeSimulatorApiController {
 
 	@Autowired
 	IncomeTaxCalc incomeTaxCalc;
+
+	@Autowired
+	SalaryDeductionCalc salaryDeductionCalc;
 
 	@RequestMapping(value="/api/getLifePlan", method = {RequestMethod.GET})
 	@ResponseBody
@@ -35,7 +39,11 @@ public class LifeSimulatorApiController {
 		String backgroundColor = "#63FF63";
 		String backgroundColor2 = "#ff6363";
 
-		System.out.println(incomeTaxCalc.calc(361));
+		int salaryDeducation = salaryDeductionCalc.calc(695);
+		System.out.println(salaryDeducation);
+		int incomeTax = incomeTaxCalc.calc(695-salaryDeducation-154);
+		System.out.println(incomeTax);
+
 
 		List<Integer> labelsList = new ArrayList<Integer>();
 		List<Integer> dataList1 = new ArrayList<Integer>();

@@ -15,7 +15,9 @@ public class PropertyUtil {
 		properties = new Properties();
 		try {
 			File file = ResourceUtils.getFile("classpath:application.properties");
+			File file2 = ResourceUtils.getFile("classpath:lifeplanapp.properties");
 			properties.load(new FileInputStream(file));
+			properties.load(new FileInputStream(file2));
 		} catch (IOException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
@@ -24,5 +26,9 @@ public class PropertyUtil {
 
 	public static String[] getIncomeTaxRate() {
 		return properties.getProperty("income.tax.rate").split(",");
+	}
+
+	public static String[] getSalaryDeducationRate() {
+		return properties.getProperty("salary.deducation.rate").split(",");
 	}
 }
