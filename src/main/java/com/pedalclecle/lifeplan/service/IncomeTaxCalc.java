@@ -26,7 +26,7 @@ public class IncomeTaxCalc implements LifePlanCalcInterface<Integer, Integer> {
 				BigDecimal taxRate = new BigDecimal(incomeTaxRate[i][1]);
 				BigDecimal deduction = new BigDecimal(incomeTaxRate[i][2]);
 
-				BigDecimal tax = income.multiply(taxRate).divide(new BigDecimal(100)).subtract(deduction);
+				BigDecimal tax = (income.subtract(income.remainder(new BigDecimal(1000)))).multiply(taxRate).divide(new BigDecimal(100)).subtract(deduction);
 				tax = tax.setScale(0, RoundingMode.DOWN);
 				return tax.intValue();
 			}
@@ -36,7 +36,7 @@ public class IncomeTaxCalc implements LifePlanCalcInterface<Integer, Integer> {
 		BigDecimal taxRate = new BigDecimal(incomeTaxRate[incomeTaxRate.length-1][1]);
 		BigDecimal deduction = new BigDecimal(incomeTaxRate[incomeTaxRate.length-1][2]);
 
-		BigDecimal tax = income.multiply(taxRate).divide(new BigDecimal(100)).subtract(deduction);
+		BigDecimal tax = (income.subtract(income.remainder(new BigDecimal(1000)))).multiply(taxRate).divide(new BigDecimal(100)).subtract(deduction);
 		return tax.setScale(0, RoundingMode.DOWN).intValue();
 	}
 }
