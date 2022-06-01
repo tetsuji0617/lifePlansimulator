@@ -31,4 +31,12 @@ public class PropertyUtil {
 	public static String[] getSalaryDeducationRate() {
 		return properties.getProperty("salary.deducation.rate").split(",");
 	}
+
+	public static String getHealthInsuranceRate() {
+		return properties.getProperty("health.insurance.rate");
+	}
+
+	public static String getWelfarePensionRate() {
+		return properties.getProperty("welfare.pension.rate");
+	}
 }
