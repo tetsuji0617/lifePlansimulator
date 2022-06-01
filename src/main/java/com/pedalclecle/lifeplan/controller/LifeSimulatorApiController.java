@@ -1,5 +1,6 @@
 package com.pedalclecle.lifeplan.controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,12 +19,14 @@ import com.pedalclecle.lifeplan.bean.InputBean;
 import com.pedalclecle.lifeplan.bean.ResponseBean;
 import com.pedalclecle.lifeplan.service.IncomeTaxCalc;
 import com.pedalclecle.lifeplan.service.SalaryDeductionCalc;
+import com.pedalclecle.lifeplan.util.NumberUtil;
+import com.pedalclecle.lifeplan.util.PropertyUtil;
 
 @RestController
 public class LifeSimulatorApiController {
 
 	private final String BACKGROUND_COLOR_ASSET = "#63FF63";
-	private final String BACKGROUND_COLOR_INCOME= "#ff6363";
+	private final String BACKGROUND_COLOR_INCOME = "#ff6363";
 
 	@Autowired
 	IncomeTaxCalc incomeTaxCalc;
@@ -31,7 +34,7 @@ public class LifeSimulatorApiController {
 	@Autowired
 	SalaryDeductionCalc salaryDeductionCalc;
 
-	@RequestMapping(value="/api/getLifePlan", method = {RequestMethod.GET})
+	@RequestMapping(value = "/api/getLifePlan", method = { RequestMethod.GET })
 	@ResponseBody
 	@CrossOrigin
 	public String receiveJsonSample() throws JsonProcessingException {
@@ -43,17 +46,16 @@ public class LifeSimulatorApiController {
 
 		int salaryDeducation = salaryDeductionCalc.calc(6959712);
 		System.out.println(salaryDeducation);
-		int incomeTax = incomeTaxCalc.calc(6959712-salaryDeducation-1548478);
+		int incomeTax = incomeTaxCalc.calc(6959712 - salaryDeducation - 1548478);
 		System.out.println(incomeTax);
-
 
 		List<Integer> labelsList = new ArrayList<Integer>();
 		List<Integer> dataList1 = new ArrayList<Integer>();
 		List<Integer> dataList2 = new ArrayList<Integer>();
 
-		for(int i = householdAge; i <= lifeOfTheHeadOfHousehold; i++) {
+		for (int i = householdAge; i <= lifeOfTheHeadOfHousehold; i++) {
 			labelsList.add(i);
-			if(i <= retirementAge) {
+			if (i <= retirementAge) {
 				assets = assets + 100;
 				dataList2.add(100);
 			} else {
@@ -92,10 +94,8 @@ public class LifeSimulatorApiController {
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(bean);
 
-
 		return json;
 	}
-
 
 	@RequestMapping(value="/api/getLifePlan2", method = {RequestMethod.POST})
 	@ResponseBody
@@ -106,11 +106,19 @@ public class LifeSimulatorApiController {
 		int lifeOfTheHeadOfHousehold = 100;
 		int retirementAge = 60;
 		int assets = 100;
+		int salary = Integer.valueOf(input.getIncome()) * 10000;
+
+
+		BigDecimal healthInsurance = this.getHealthInsuranceDeducation(salary, new BigDecimal(PropertyUtil.getHealthInsuranceRate()));
+		BigDecimal weelfarePension = this.getHealthInsuranceDeducation(salary, new BigDecimal(PropertyUtil.getWelfarePensionRate()));
+
+		System.out.println("health insurance:" + healthInsurance);
+		System.out.println("welfare Pension :" + weelfarePension);
 
 		int salaryDeducation = salaryDeductionCalc.calc(Integer.valueOf(input.getIncome())*10000);
-		System.out.println(salaryDeducation);
-		int incomeTax = incomeTaxCalc.calc(Integer.valueOf(input.getIncome())-salaryDeducation-1548478);
-		System.out.println(incomeTax);
+		System.out.println("Salary Deducation; "  + salaryDeducation);
+		int incomeTax = incomeTaxCalc.calc(Integer.valueOf(input.getIncome())*10000-salaryDeducation-healthInsurance.intValue()-weelfarePension.intValue());
+		System.out.println("income Tax:" + incomeTax);
 
 
 		List<Integer> labelsList = new ArrayList<Integer>();
@@ -162,4 +170,11 @@ public class LifeSimulatorApiController {
 		return json;
 	}
 
+	BigDecimal getHealthInsuranceDeducation(int salary, BigDecimal healthInsuranceRate) {
+		return NumberUtil.stringToDecimal(salary).multiply(healthInsuranceRate).divide(NumberUtil.stringToDecimal(2)).divide(NumberUtil.stringToDecimal(100));
+	}
+
+	BigDecimal getHealthInsuranceDeducation(int salary, int healthInsuranceRate) {
+		return getHealthInsuranceDeducation(salary, new BigDecimal(healthInsuranceRate));
+	}
 }
