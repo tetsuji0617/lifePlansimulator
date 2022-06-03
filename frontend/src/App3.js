@@ -16,10 +16,15 @@ const App3 = () => {
 
     const inputChange = (e) => {
         const inputValue = e.target.value
-        const inputKey = e.target.name
+        const inputKey = e.target.title
         this.setState({
             [inputKey]: inputValue
         })
+    }
+
+    const expenseChanged = (e) => {
+        const expenseValue = e.value
+        setExpense(expenseValue)
     }
 
     const ageChanged = (e) => {
@@ -64,7 +69,7 @@ const App3 = () => {
                         onChange={incomeChanged}
                         value={income} />
                     <ValueInput title='expense'
-                        onChange={inputChange}
+                        onChange={expenseChanged}
                         value={expense} />
                     <Bar data={jsonData}
                         width={500}
