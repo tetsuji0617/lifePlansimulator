@@ -41,6 +41,7 @@
   "proxy": "http://localhost:8080",
   "devDependencies": {
     "chart.js": "^3.7.1",
-    "react-chartjs-2": "^4.1.0"
+    "react-chartjs-2": "^4.1.0",
+    "react-tabs": "^5.1.0"
   }
 }
