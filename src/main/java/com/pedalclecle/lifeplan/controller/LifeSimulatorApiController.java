@@ -108,7 +108,7 @@ public class LifeSimulatorApiController {
 	@CrossOrigin
 	public String receiveJson(@RequestBody InputBean input) throws JsonProcessingException {
 
-		int householdAge = Integer.valueOf(input.getAge());
+		int householdAge = Integer.valueOf(input.getAge()); 
 		int lifeOfTheHeadOfHousehold = 100;
 		int retirementAge = 60;
 		int assets = 100;
@@ -154,6 +154,7 @@ public class LifeSimulatorApiController {
 		dataset.setData(data);
 		dataset.setBackgroundColor(BACKGROUND_COLOR_ASSET);
 		dataset.setType("line");
+//		dataset.setYAxisID("yAxisSales");
 
 		datasets[0] = dataset;
 
@@ -164,6 +165,7 @@ public class LifeSimulatorApiController {
 		dataset2.setData(data2);
 		dataset2.setBackgroundColor(BACKGROUND_COLOR_INCOME);
 		dataset2.setType("bar");
+//		dataset2.setYAxisID("yAxisPercentage");
 
 		datasets[1] = dataset2;
 

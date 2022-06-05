@@ -11,4 +11,8 @@ public class InputBean {
 
 	String expense;
 
+	Household household;
+
+	Partner partner;
+
 }
