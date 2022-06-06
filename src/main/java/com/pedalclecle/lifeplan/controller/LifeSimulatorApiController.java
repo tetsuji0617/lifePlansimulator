@@ -112,6 +112,8 @@ public class LifeSimulatorApiController {
 		int lifeOfTheHeadOfHousehold = 100;
 		int retirementAge = 60;
 		int assets = Integer.valueOf(input.getAsset());
+		int householdBirthYear = input.getHousehold().getBirthYear();
+		System.out.println(householdBirthYear);
 		BigDecimal salary = new BigDecimal(input.getIncome()).multiply(new BigDecimal(10000));
 		BigDecimal expensesPerYear = new BigDecimal(input.getExpense()).multiply(new BigDecimal(12)).multiply(new BigDecimal(10000));
 
