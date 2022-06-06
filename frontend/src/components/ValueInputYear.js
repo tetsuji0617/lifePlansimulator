@@ -21,7 +21,8 @@ const ValueInputYear = (props) => {
                 <input type='text'
                     value={year}
                     onChange={(e) => {
-                        props.setValue(e.target.value)
+                        props.setValue({...e.target.value, [props.title]: e.target.value})
+                        console.log('valueinputYear:' + e.target.value + ' ' + e.target.title)
                         setYear(e.target.value)
                     }}
                     onBlur={handleBlur}
