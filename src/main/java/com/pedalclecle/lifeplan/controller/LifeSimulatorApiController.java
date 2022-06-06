@@ -108,10 +108,10 @@ public class LifeSimulatorApiController {
 	@CrossOrigin
 	public String receiveJson(@RequestBody InputBean input) throws JsonProcessingException {
 
-		int householdAge = Integer.valueOf(input.getAge()); 
+		int householdAge = Integer.valueOf(input.getAge());
 		int lifeOfTheHeadOfHousehold = 100;
 		int retirementAge = 60;
-		int assets = 100;
+		int assets = Integer.valueOf(input.getAsset());
 		BigDecimal salary = new BigDecimal(input.getIncome()).multiply(new BigDecimal(10000));
 		BigDecimal expensesPerYear = new BigDecimal(input.getExpense()).multiply(new BigDecimal(12)).multiply(new BigDecimal(10000));
 
