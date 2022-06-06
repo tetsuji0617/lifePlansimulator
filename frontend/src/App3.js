@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Chart, registerables } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 import ValueInput from './components/ValueInput'
-
+import ValueInputYear from './components/ValueInputYear'
 
 Chart.register(...registerables)
 
@@ -12,14 +14,22 @@ const App3 = () => {
     const [age, setAge] = useState(35)
     const [income, setIncome] = useState(500)
     const [expense, setExpense] = useState(20)
+    const [asset, setAsset] = useState(1000)
     const [jsonData, setJsonData] = useState({});
 
+    const [values, setValues] = useState({
+        birthYear: "",
+        birthMonth: "",
+        income: "",
+        retirementAge: ""
+    });
+
     const inputChange = (e) => {
-        const inputValue = e.target.value
-        const inputKey = e.target.title
-        this.setState({
-            [inputKey]: inputValue
-        })
+        const inputValue = e.value
+        const inputKey = e.title
+        console.log('inputChange title:' + e.title + ' value:' + e.value)
+        setValues
+            ({ ...values, [inputKey]: inputValue });
     }
 
     const expenseChanged = (e) => {
@@ -32,19 +42,31 @@ const App3 = () => {
         setAge(ageValue)
     }
     const incomeChanged = (e) => {
+        console.log(e.value)
         const incomeValue = e.value
         setIncome(incomeValue)
     }
-
+    const assetChanged = (e) => {
+        console.log(e.value)
+        const assetValue = e.value
+        setAsset(assetValue)
+    }
     useEffect(() => {
         console.log('useEffect')
         console.log(income)
         console.log(age)
         console.log(expense)
+        console.log(values.birthYear)
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ income: income, age: age, expense: expense })
+            body: JSON.stringify({
+                income: income, age: age, expense: expense, asset: asset, household: {
+                    income: income,
+                    birthYear: values.birthYear,
+                    birthMonth: values.birthMonth
+                }
+            })
         }
         fetch('http://localhost:8080/api/getLifePlan2', requestOptions)
             .then((response) => response.json())
@@ -54,29 +76,81 @@ const App3 = () => {
                 setLoding(true)
             })
         console.log('useEffect End')
-    }, [age, income, expense])
+    }, [age, income, expense, asset])
+
+    const handleSelect = (index, last) => {
+        console.log('selected tab: ' + index + ', Last tab: ' + last);
+    }
 
     if (loading) {
         console.log('render')
 
         return (
             <div>
-                <div>
-                    <ValueInput title='age'
-                        onChange={ageChanged}
-                        value={age} />
-                    <ValueInput title='income'
-                        onChange={incomeChanged}
-                        value={income} />
-                    <ValueInput title='expense'
-                        onChange={expenseChanged}
-                        value={expense} />
-                    <Bar data={jsonData}
-                        width={500}
-                        height={500}
-                    options={{ maintainAspectRatio: false, responsive: false }}
-                    />
-                </div>
+                <Tabs>
+                    <TabList>
+                        <Tab>yourself</Tab>
+                        <Tab>family</Tab>
+                    </TabList>
+                    <TabPanel>
+                        <div>
+                            <ValueInput title='age'
+                                onChange={ageChanged}
+                                value={age}
+                                setValue={setAge} />
+                            <ValueInput title='income'
+                                onChange={incomeChanged}
+                                value={income}
+                                setValue={setIncome} />
+                            <ValueInput title='expense'
+                                onChange={expenseChanged}
+                                value={expense}
+                                setValue={setExpense} />
+                            <ValueInput title='asset'
+                                onChange={assetChanged}
+                                value={asset}
+                                setValue={setAsset} />
+                            <ValueInputYear title='birthYear'
+                                onChange={inputChange}
+                                value={values.birthYear}
+                                setValue={setValues}
+                            />
+                            <ValueInput title='birthMonth'
+                                onChange={inputChange}
+                                value={values.birthMonth} />
+                        </div>
+                    </TabPanel>
+                    <TabPanel>
+                        test
+                    </TabPanel>
+                </Tabs>
+                <Bar data={jsonData}
+                    width={500}
+                    height={500}
+                    options={{
+                        maintainAspectRatio: false, responsive: false,
+                        /*                     scales: {
+                                                 yAxisSales: {
+                                                     scaleLabel: {
+                                                         display: true,
+                                                         labelString: '円'
+                                                     },
+                                                     id: 'yAxisSales',
+                                                     position: 'left',
+                                                     beginAtZero: true
+                                                 },
+                                                 yAxisPercentage: {
+                                                     scaleLabel: {
+                                                         display: true,
+                                                         labelString: '円'
+                                                     },
+                                                     id: 'yAxisPercentage',
+                                                     position: 'right',
+                                                     beginAtZero: true
+                                                 }
+                                             }
+                                             */
+                    }} />
             </div>
         );
     } else {
