@@ -111,7 +111,9 @@ public class LifeSimulatorApiController {
 		int householdAge = Integer.valueOf(input.getAge());
 		int lifeOfTheHeadOfHousehold = 100;
 		int retirementAge = 60;
-		int assets = 100;
+		int assets = Integer.valueOf(input.getAsset());
+		int householdBirthYear = input.getHousehold().getBirthYear();
+		System.out.println(householdBirthYear);
 		BigDecimal salary = new BigDecimal(input.getIncome()).multiply(new BigDecimal(10000));
 		BigDecimal expensesPerYear = new BigDecimal(input.getExpense()).multiply(new BigDecimal(12)).multiply(new BigDecimal(10000));
 
@@ -154,6 +156,7 @@ public class LifeSimulatorApiController {
 		dataset.setData(data);
 		dataset.setBackgroundColor(BACKGROUND_COLOR_ASSET);
 		dataset.setType("line");
+//		dataset.setYAxisID("yAxisSales");
 
 		datasets[0] = dataset;
 
@@ -164,6 +167,7 @@ public class LifeSimulatorApiController {
 		dataset2.setData(data2);
 		dataset2.setBackgroundColor(BACKGROUND_COLOR_INCOME);
 		dataset2.setType("bar");
+//		dataset2.setYAxisID("yAxisPercentage");
 
 		datasets[1] = dataset2;
 

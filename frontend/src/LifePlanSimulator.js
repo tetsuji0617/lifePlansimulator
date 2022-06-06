@@ -8,7 +8,7 @@ import ValueInputYear from './components/ValueInputYear'
 
 Chart.register(...registerables)
 
-const App3 = () => {
+const LifePlanSimulator = () => {
 
     const [loading, setLoding] = useState(false)
     const [age, setAge] = useState(35)
@@ -76,11 +76,7 @@ const App3 = () => {
                 setLoding(true)
             })
         console.log('useEffect End')
-    }, [age, income, expense, asset])
-
-    const handleSelect = (index, last) => {
-        console.log('selected tab: ' + index + ', Last tab: ' + last);
-    }
+    }, [age, income, expense, asset, values])
 
     if (loading) {
         console.log('render')
@@ -112,7 +108,7 @@ const App3 = () => {
                                 setValue={setAsset} />
                             <ValueInputYear title='birthYear'
                                 onChange={inputChange}
-                                value={values.birthYear}
+                                value={values}
                                 setValue={setValues}
                             />
                             <ValueInput title='birthMonth'
@@ -163,4 +159,4 @@ const App3 = () => {
 }
 
 
-export default App3;
+export default LifePlanSimulator;
