@@ -108,7 +108,7 @@ const LifePlanSimulator = () => {
                                 setValue={setAsset} />
                             <ValueInputYear title='birthYear'
                                 onChange={inputChange}
-                                value={values.birthYear}
+                                value={values}
                                 setValue={setValues}
                             />
                             <ValueInput title='birthMonth'
