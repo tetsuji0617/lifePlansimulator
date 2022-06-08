@@ -5,6 +5,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import ValueInput from './components/ValueInput'
 import ValueInputYear from './components/ValueInputYear'
+import ValueInputMonth from './components/ValueInputMonth'
 
 Chart.register(...registerables)
 
@@ -75,12 +76,9 @@ const LifePlanSimulator = () => {
                 setJsonData(responseJson)
                 setLoding(true)
             })
-        console.log('useEffect End')
     }, [age, income, expense, asset, values])
 
     if (loading) {
-        console.log('render')
-
         return (
             <div>
                 <Tabs>
@@ -111,9 +109,11 @@ const LifePlanSimulator = () => {
                                 value={values}
                                 setValue={setValues}
                             />
-                            <ValueInput title='birthMonth'
+                            <ValueInputMonth title='birthMonth'
                                 onChange={inputChange}
-                                value={values.birthMonth} />
+                                value={values}
+                                setValue={setValues}
+                            />
                         </div>
                     </TabPanel>
                     <TabPanel>
@@ -121,8 +121,8 @@ const LifePlanSimulator = () => {
                     </TabPanel>
                 </Tabs>
                 <Bar data={jsonData}
-                    width={500}
-                    height={500}
+                    width={800}
+                    height={400}
                     options={{
                         maintainAspectRatio: false, responsive: false,
                         /*                     scales: {

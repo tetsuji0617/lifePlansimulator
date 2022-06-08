@@ -1,7 +1,9 @@
 package com.pedalclecle.lifeplan.controller;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,8 +110,15 @@ public class LifeSimulatorApiController {
 	@CrossOrigin
 	public String receiveJson(@RequestBody InputBean input) throws JsonProcessingException {
 
-		int householdAge = Integer.valueOf(input.getAge());
-		int lifeOfTheHeadOfHousehold = 100;
+        //現在時刻でカレンダーのインスタンスを取得
+        Calendar cal = Calendar.getInstance();
+        //SimpleDateFormatで書式を指定
+        SimpleDateFormat sdf = new SimpleDateFormat(input.getHousehold().getBirthYear() + "/" + input.getHousehold().getBirthMonth() + "/01");
+        //Calendarの日付をSimpleDateFormatで指定した書式で文字列に変換
+        System.out.println(sdf.format(cal.getTime()));
+
+        int householdAge = Integer.valueOf(input.getAge());
+        int lifeOfTheHeadOfHousehold = 100;
 		int retirementAge = 60;
 		int assets = Integer.valueOf(input.getAsset());
 		int householdBirthYear = input.getHousehold().getBirthYear();
