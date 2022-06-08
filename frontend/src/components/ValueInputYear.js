@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import TextField from '@mui/material/TextField'
 
 const ValueInputYear = (props) => {
     const [year, setYear] = useState('')
@@ -16,22 +17,24 @@ const ValueInputYear = (props) => {
     }
 
     return (
-        <div>
-            <label>{props.title}:
-                <input type='text'
-                    value={year}
-                    onChange={(e) => {
-                        props.setValue({...e.target.value, [props.title]: e.target.value})
-                        console.log('valueinputYear:' + e.target.value + ' ' + e.target.title)
-                        setYear(e.target.value)
-                    }}
-                    onBlur={handleBlur}
-                />
-                {yearError && <label>{yearError}</label>}
-            </label>
+          <>
 
-        </div>
+            <TextField
+                id="input-year"
+                label="Birth Year"
+                valiant="outlined"
+                inputProps={year}
+                onChange={(e) => {
+                    props.setValue({ ...props.value, [props.title]: e.target.value })
+                    setYear(e.target.value)
+                }}
+                onBlur={handleBlur}
+                margin="normal"
+            />
+          </>
     )
 };
 
 export default ValueInputYear;
+
+
