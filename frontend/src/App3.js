@@ -5,6 +5,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import ValueInput from './components/ValueInput'
 import ValueInputYear from './components/ValueInputYear'
+import ValueInputMonth from './components/ValueInputMonth'
 
 Chart.register(...registerables)
 
