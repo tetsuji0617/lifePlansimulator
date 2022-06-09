@@ -4,31 +4,36 @@ import TextField from '@mui/material/TextField'
 
 const ValueInputMonth = (props) => {
     const [month, setMonth] = useState('')
-    const [monthError, setMonthError] = useState('')
+    const [monthError, setMonthError] = useState(false)
 
-    const handleBlur = (e) => {
+    const hasError = (e) => {
         const month = e.target.value
         if (!month) {
-            setMonthError('required')
-        } else if (month < 0 || 12 < month) {
-            setMonthError('from 1 to 12')
+            return true
+        } else if (month < 1 || 12 < month) {
+            return true
         } else {
-            setMonthError()
+            return false
         }
     }
 
     return (
         <>
             <TextField
+                error={monthError}
                 id="input-month"
                 label="Birth Month"
                 valieant="outlined"
                 inputProps={month}
                 onChange={(e) => {
-                    props.setValue({ ...props.value, [props.title]: e.target.value })
-                    setMonth(e.target.value)
+                    if (!hasError(e)) {
+                        props.setValue({ ...props.value, [props.title]: e.target.value })
+                        setMonth(e.target.value)
+                        setMonthError(false)
+                    } else {
+                        setMonthError(true)
+                    }
                 }}
-                onBlur={handleBlur}
                 margin="normal"
             />
         </>

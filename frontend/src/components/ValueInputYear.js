@@ -3,35 +3,41 @@ import TextField from '@mui/material/TextField'
 
 const ValueInputYear = (props) => {
     const [year, setYear] = useState('')
-    const [yearError, setYearError] = useState('')
+    const [yearError, setYearError] = useState(false)
 
-    const handleBlur = (e) => {
+    const hasError = (e) => {
         const year = e.target.value
         if (!year) {
-            setYearError('required')
+            return true
         } else if (year.length < 4) {
-            setYearError('should longer than 4')
+            return true
+        } else if (year < 1920 || 2022 < year) {
+            return true
         } else {
-            setYearError()
+            return false
         }
     }
 
     return (
-          <>
-
+        <>
             <TextField
+                error={yearError}
                 id="input-year"
                 label="Birth Year"
                 valiant="outlined"
                 inputProps={year}
                 onChange={(e) => {
-                    props.setValue({ ...props.value, [props.title]: e.target.value })
-                    setYear(e.target.value)
+                    if (!hasError(e)) {
+                        props.setValue({ ...props.value, [props.title]: e.target.value })
+                        setYear(e.target.value)
+                        setYearError(false)
+                    } else {
+                        setYearError(true)
+                    }
                 }}
-                onBlur={handleBlur}
                 margin="normal"
             />
-          </>
+        </>
     )
 };
 
