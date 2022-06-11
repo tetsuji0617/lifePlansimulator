@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import Grid from '@mui/material/Grid'
 
 
 
@@ -19,20 +19,47 @@ const ValueInput = (props) => {
         }
     }
 
+    const hasError = (e) => {
+        const value = e.target.value
+        const newValue = value.replace(/[^0-9.]+/g, '')
+        if (!newValue) {
+            return true
+        } else if (value.length < 1) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    const gridContainerStyle = {
+        verticalAlign: "center",
+        border: "1px solid grey ",
+        padding: "10px",
+        margin: "10px",
+    }
 
     return (
-        <div>
-            <label>{props.title}: <br />
+        <Grid container spaceing={1} style={gridContainerStyle}>
+            <Grid item xs={3}>
+                <label>{props.title}</label>
+            </Grid>
+            <Grid item xs={1}>
+                <label>:</label>
+            </Grid>
+            <Grid item xs={8}>
                 <input type='text'
                     value={input}
-                    onChange={(e) =>{
-                        props.setValue(e.target.value)
-                        setInput(e.target.value)
+                    onChange={(e) => {
+                        if (!hasError(e)) {
+                            props.setValue(e.target.value)
+                            setInput(e.target.value)
+                        }
                     }}
                     onBlur={handleBlur} />
-            </label>
-            {inputError && <label>{inputError}</label>}
-        </div>
+
+                {inputError && <label>{inputError}</label>}
+            </Grid>
+        </Grid>
     )
 };
 
