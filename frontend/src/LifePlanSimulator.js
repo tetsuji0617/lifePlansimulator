@@ -6,6 +6,8 @@ import 'react-tabs/style/react-tabs.css';
 import ValueInput from './components/ValueInput'
 import ValueInputYear from './components/ValueInputYear'
 import ValueInputMonth from './components/ValueInputMonth'
+import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
 
 Chart.register(...registerables)
 
@@ -80,44 +82,79 @@ const LifePlanSimulator = () => {
 
     if (loading) {
         return (
-            <div>
-                <Tabs>
+            <Grid spacing={2}>
+                <Tabs style={{height:"40%"}}>
                     <TabList>
-                        <Tab>yourself</Tab>
-                        <Tab>family</Tab>
+                        <Tab>本人</Tab>
+                        <Tab>世帯主収入</Tab>
+                        <Tab>パートナー</Tab>
+                        <Tab>家族</Tab>
+                        <Tab>生活費</Tab>
+                        <Tab>保険</Tab>
+                        <Tab>資産</Tab>
                     </TabList>
                     <TabPanel>
-                        <div>
-                            <ValueInput title='age'
-                                onChange={ageChanged}
-                                value={age}
-                                setValue={setAge} />
-                            <ValueInput title='income'
+                        <Grid container spaceing={1} style={{ border: "1px solid grey", padding: "10px" }}>
+                            <Grid item xs={8} style={{ backgroundColor: "#ddd", margin: "0px 10px 0px 10px", padding: "10px", borderRadius: "2px" }}>
+                                世帯主の情報を入れてください
+                            </Grid>
+                            <Grid item xs={8}>
+                                <ValueInput title='年齢'
+                                    onChange={ageChanged}
+                                    value={age}
+                                    setValue={setAge} />
+                            </Grid>
+                            <Grid item xs={8}>
+                                <ValueInputYear title='birthYear'
+                                    onChange={inputChange}
+                                    value={values}
+                                    setValue={setValues} />
+                            </Grid>
+                            <Grid item xs={8}>
+                                <ValueInputMonth title='birthMonth'
+                                    onChange={inputChange}
+                                    value={values}
+                                    setValue={setValues}
+                                />
+                            </Grid>
+                        </Grid>
+                    </TabPanel>
+                    <TabPanel>
+                        <Grid item xs={8} style={{ backgroundColor: "#ddd", margin: "0px 10px 0px 10px", padding: "10px", borderRadius: "2px" }}>
+                            世帯主の収入情報を入れてください
+                        </Grid>
+                        <Grid item xs={8}>
+                            <ValueInput title='収入(額面)'
                                 onChange={incomeChanged}
                                 value={income}
                                 setValue={setIncome} />
+                        </Grid>
+                    </TabPanel>
+                    <TabPanel>
+                        test
+                    </TabPanel>
+                    <TabPanel>
+                        test
+                    </TabPanel>
+                    <TabPanel>
+                        <Grid item xs={8} style={{ backgroundColor: "#ddd", margin: "0px 10px 0px 10px", padding: "10px", borderRadius: "2px" }}>
+                            世帯の収入情報を入れてください
+                        </Grid>
+                        <Grid item xs={8}>
                             <ValueInput title='expense'
                                 onChange={expenseChanged}
                                 value={expense}
                                 setValue={setExpense} />
+                        </Grid>
+                    </TabPanel>
+                    <TabPanel>
+                        <Grid item xs={8}>
                             <ValueInput title='asset'
                                 onChange={assetChanged}
                                 value={asset}
                                 setValue={setAsset} />
-                            <ValueInputYear title='birthYear'
-                                onChange={inputChange}
-                                value={values}
-                                setValue={setValues}
-                            />
-                            <ValueInputMonth title='birthMonth'
-                                onChange={inputChange}
-                                value={values}
-                                setValue={setValues}
-                            />
-                        </div>
-                    </TabPanel>
-                    <TabPanel>
-                        test
+                        </Grid>
+
                     </TabPanel>
                 </Tabs>
                 <Bar data={jsonData}
@@ -147,7 +184,7 @@ const LifePlanSimulator = () => {
                                              }
                                              */
                     }} />
-            </div>
+            </Grid>
         );
     } else {
         return (
