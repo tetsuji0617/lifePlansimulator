@@ -82,11 +82,10 @@ const LifePlanSimulator = () => {
 
     if (loading) {
         return (
-            <Grid spacing={2}>
-                <Tabs style={{height:"40%"}}>
+            <Grid spacing={2} style={{ margin: "20px" }}>
+                <Tabs style={{ height: "40%" }} style={{ margin: "20px" }}>
                     <TabList>
                         <Tab>本人</Tab>
-                        <Tab>世帯主収入</Tab>
                         <Tab>パートナー</Tab>
                         <Tab>家族</Tab>
                         <Tab>生活費</Tab>
@@ -94,8 +93,8 @@ const LifePlanSimulator = () => {
                         <Tab>資産</Tab>
                     </TabList>
                     <TabPanel>
-                        <Grid container spaceing={1} style={{ border: "1px solid grey", padding: "10px" }}>
-                            <Grid item xs={8} style={{ backgroundColor: "#ddd", margin: "0px 10px 0px 10px", padding: "10px", borderRadius: "2px" }}>
+                        <Grid container spaceing={1} style={{ backgroundColor: "#ddd", borderRadius: "5px" }}>
+                            <Grid item xs={12} style={{ backgroundColor: "#33d", color:"#fff", borderRadius: "5px 5px 0px 0px", padding:"10px 0px 10px 10px", fontWeight:"bold" }}>
                                 世帯主の情報を入れてください
                             </Grid>
                             <Grid item xs={8}>
@@ -104,34 +103,36 @@ const LifePlanSimulator = () => {
                                     value={age}
                                     setValue={setAge} />
                             </Grid>
-                            <Grid item xs={8}>
-                                <ValueInputYear title='birthYear'
-                                    onChange={inputChange}
-                                    value={values}
-                                    setValue={setValues} />
+                            <Grid item xs={8} style={{ backgroundColor: "#ddd", borderRadius: "2px" }}>
                             </Grid>
                             <Grid item xs={8}>
-                                <ValueInputMonth title='birthMonth'
-                                    onChange={inputChange}
-                                    value={values}
-                                    setValue={setValues}
-                                />
+                                <ValueInput title='収入(額面)'
+                                    onChange={incomeChanged}
+                                    value={income}
+                                    setValue={setIncome} />
                             </Grid>
                         </Grid>
                     </TabPanel>
                     <TabPanel>
-                        <Grid item xs={8} style={{ backgroundColor: "#ddd", margin: "0px 10px 0px 10px", padding: "10px", borderRadius: "2px" }}>
-                            世帯主の収入情報を入れてください
+                       <Grid container spaceing={1} style={{ backgroundColor: "#ddd", borderRadius: "5px" }}>
+                            <Grid item xs={12} style={{ backgroundColor: "#33d", color:"#fff", borderRadius: "5px 5px 0px 0px", padding:"10px 0px 10px 10px", fontWeight:"bold" }}>
+                               パートナーの情報を入れてください
+                            </Grid>
+                            <Grid item xs={8}>
+                                <ValueInput title='年齢'
+                                    onChange={ageChanged}
+                                    value={age}
+                                    setValue={setAge} />
+                            </Grid>
+                            <Grid item xs={8} style={{ backgroundColor: "#ddd", borderRadius: "2px" }}>
+                            </Grid>
+                            <Grid item xs={8}>
+                                <ValueInput title='収入(額面)'
+                                    onChange={incomeChanged}
+                                    value={income}
+                                    setValue={setIncome} />
+                            </Grid>
                         </Grid>
-                        <Grid item xs={8}>
-                            <ValueInput title='収入(額面)'
-                                onChange={incomeChanged}
-                                value={income}
-                                setValue={setIncome} />
-                        </Grid>
-                    </TabPanel>
-                    <TabPanel>
-                        test
                     </TabPanel>
                     <TabPanel>
                         test

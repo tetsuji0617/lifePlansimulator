@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Grid from '@mui/material/Grid'
-import TextField from '@mui/material/TextField'
+
 
 
 const ValueInput = (props) => {
@@ -24,6 +24,8 @@ const ValueInput = (props) => {
         const newValue = value.replace(/[^0-9.]+/g, '')
         if (!newValue) {
             return true
+        } else if (value.length < 1) {
+            return true
         } else {
             return false
         }
@@ -34,7 +36,6 @@ const ValueInput = (props) => {
         border: "1px solid grey ",
         padding: "10px",
         margin: "10px",
-
     }
 
     return (
@@ -46,23 +47,17 @@ const ValueInput = (props) => {
                 <label>:</label>
             </Grid>
             <Grid item xs={8}>
-                <TextField
-                    error={inputError}
-                    id={props.title}
+                <input type='text'
                     value={input}
-                    label={props.title}
-                    variant="outlined"
-                    inputProps={input}
                     onChange={(e) => {
                         if (!hasError(e)) {
                             props.setValue(e.target.value)
                             setInput(e.target.value)
-                            setInputError(false)
-                        } else {
-                            setInputError(true)
                         }
                     }}
-                    />
+                    onBlur={handleBlur} />
+
+                {inputError && <label>{inputError}</label>}
             </Grid>
         </Grid>
     )
