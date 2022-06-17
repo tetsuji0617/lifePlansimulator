@@ -7,18 +7,6 @@ const ValueInput = (props) => {
     const [input, setInput] = useState(props.value)
     const [inputError, setInputError] = useState('')
 
-
-    const handleBlur = (e) => {
-        console.log('valueinput.handleBlur')
-        const v = e.target.value
-        const newValue = v.replace(/[^0-9.]+/g, '')
-        if (!newValue) {
-            setInputError('required')
-        } else {
-            setInputError()
-        }
-    }
-
     const hasError = (e) => {
         const value = e.target.value
         const newValue = value.replace(/[^0-9.]+/g, '')
@@ -30,10 +18,11 @@ const ValueInput = (props) => {
     }
 
     const gridContainerStyle = {
-        verticalAlign: "center",
+        verticalAlign: "middle",
         border: "1px solid grey ",
         padding: "10px",
         margin: "10px",
+        backgroundColor:"#fff",
 
     }
 
@@ -55,14 +44,14 @@ const ValueInput = (props) => {
                     inputProps={input}
                     onChange={(e) => {
                         if (!hasError(e)) {
-                            props.setValue(e.target.value)
-                            setInput(e.target.value)
                             setInputError(false)
                         } else {
                             setInputError(true)
                         }
+                        props.setValue(e.target.value)
+                        setInput(e.target.value)
                     }}
-                    />
+                />
             </Grid>
         </Grid>
     )
