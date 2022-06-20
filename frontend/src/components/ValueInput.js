@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
-
+import * as Styles from './style'
 
 const ValueInput = (props) => {
     const [input, setInput] = useState(props.value)
@@ -17,17 +17,8 @@ const ValueInput = (props) => {
         }
     }
 
-    const gridContainerStyle = {
-        verticalAlign: "middle",
-        border: "1px solid grey ",
-        padding: "10px",
-        margin: "10px",
-        backgroundColor:"#fff",
-
-    }
-
     return (
-        <Grid container spaceing={1} style={gridContainerStyle}>
+        <Grid container spaceing={1} style={Styles.gridContainerStyle}>
             <Grid item xs={3}>
                 <label>{props.title}</label>
             </Grid>
