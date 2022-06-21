@@ -4,10 +4,8 @@ import { Bar } from 'react-chartjs-2';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import ValueInput from './components/ValueInput'
-import ValueInputYear from './components/ValueInputYear'
-import ValueInputMonth from './components/ValueInputMonth'
-import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
+import * as Styles from './components/style'
 
 Chart.register(...registerables)
 
@@ -30,6 +28,7 @@ const LifePlanSimulator = () => {
     const inputChange = (e) => {
         const inputValue = e.value
         const inputKey = e.title
+
         console.log('inputChange title:' + e.title + ' value:' + e.value)
         setValues
             ({ ...values, [inputKey]: inputValue });
@@ -82,8 +81,8 @@ const LifePlanSimulator = () => {
 
     if (loading) {
         return (
-            <Grid spacing={2} style={{ margin: "20px" }}>
-                <Tabs style={{ height: "40%" }} style={{ margin: "20px" }}>
+            <Grid spacing={2} style={Styles.gridBody}>
+                <Tabs style={Styles.tabBody}>
                     <TabList>
                         <Tab>本人</Tab>
                         <Tab>パートナー</Tab>
@@ -93,8 +92,8 @@ const LifePlanSimulator = () => {
                         <Tab>資産</Tab>
                     </TabList>
                     <TabPanel>
-                        <Grid container spaceing={1} style={{ backgroundColor: "#ddd", borderRadius: "5px" }}>
-                            <Grid item xs={12} style={{ backgroundColor: "#33d", color:"#fff", borderRadius: "5px 5px 0px 0px", padding:"10px 0px 10px 10px", fontWeight:"bold" }}>
+                        <Grid container spaceing={1} style={Styles.gridContainer}>
+                            <Grid item xs={12} style={Styles.gridSectionTitle}>
                                 世帯主の情報を入れてください
                             </Grid>
                             <Grid item xs={8}>
@@ -102,8 +101,6 @@ const LifePlanSimulator = () => {
                                     onChange={ageChanged}
                                     value={age}
                                     setValue={setAge} />
-                            </Grid>
-                            <Grid item xs={8} style={{ backgroundColor: "#ddd", borderRadius: "2px" }}>
                             </Grid>
                             <Grid item xs={8}>
                                 <ValueInput title='収入(額面)'
@@ -114,17 +111,15 @@ const LifePlanSimulator = () => {
                         </Grid>
                     </TabPanel>
                     <TabPanel>
-                       <Grid container spaceing={1} style={{ backgroundColor: "#ddd", borderRadius: "5px" }}>
-                            <Grid item xs={12} style={{ backgroundColor: "#33d", color:"#fff", borderRadius: "5px 5px 0px 0px", padding:"10px 0px 10px 10px", fontWeight:"bold" }}>
-                               パートナーの情報を入れてください
+                       <Grid container spaceing={1} style={Styles.gridContainer}>
+                            <Grid item xs={12} style={Styles.gridSectionTitle}>
+                                パートナーの情報を入れてください
                             </Grid>
                             <Grid item xs={8}>
                                 <ValueInput title='年齢'
                                     onChange={ageChanged}
                                     value={age}
                                     setValue={setAge} />
-                            </Grid>
-                            <Grid item xs={8} style={{ backgroundColor: "#ddd", borderRadius: "2px" }}>
                             </Grid>
                             <Grid item xs={8}>
                                 <ValueInput title='収入(額面)'
@@ -138,7 +133,7 @@ const LifePlanSimulator = () => {
                         test
                     </TabPanel>
                     <TabPanel>
-                        <Grid item xs={8} style={{ backgroundColor: "#ddd", margin: "0px 10px 0px 10px", padding: "10px", borderRadius: "2px" }}>
+                            <Grid item xs={12} style={Styles.gridSectionTitle}>
                             世帯の収入情報を入れてください
                         </Grid>
                         <Grid item xs={8}>
