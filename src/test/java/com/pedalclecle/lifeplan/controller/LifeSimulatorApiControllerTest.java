@@ -7,6 +7,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -15,6 +17,7 @@ class LifeSimulatorApiControllerTest {
 	@Autowired
 	MockMvc mockMvc;
 
+	@Autowired
 	LifeSimulatorApiController lifeSimulatorApiController;
 
 	@BeforeEach
@@ -23,8 +26,8 @@ class LifeSimulatorApiControllerTest {
 	}
 
 	@Test
-	void testGetHealthInsuranceDeducation() {
-
+	void testGetHealthInsuranceDeducation() throws JsonProcessingException {
+//		lifeSimulatorApiController.receiveJsonSample();
 	}
 
 }

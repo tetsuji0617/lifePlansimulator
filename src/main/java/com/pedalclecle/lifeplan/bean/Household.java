@@ -5,11 +5,11 @@ import lombok.Data;
 @Data
 public class Household {
 
-	int birthYear;
+	String birthYear;
 
-	int birthMonth;
+	String birthMonth;
 
-	int income;
+	String income;
 
-	int retirementAge;
+	String retirementAge;
 }
