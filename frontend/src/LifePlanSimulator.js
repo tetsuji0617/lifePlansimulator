@@ -19,8 +19,9 @@ const LifePlanSimulator = () => {
     const [jsonData, setJsonData] = useState({});
 
     const [values, setValues] = useState({
-        birthYear: "",
-        birthMonth: "",
+        age: "",
+        birthYear: "1990",
+        birthMonth: "01",
         income: "",
         retirementAge: ""
     });
@@ -108,10 +109,22 @@ const LifePlanSimulator = () => {
                                     value={income}
                                     setValue={setIncome} />
                             </Grid>
+                            <Grid item xs={8}>
+                                <ValueInput title='資産'
+                                    onChange={assetChanged}
+                                    value={asset}
+                                    setValue={setAsset} />
+                            </Grid>
+                            <Grid item xs={8}>
+                                <ValueInput title='生活費(1か月あたり)'
+                                    onChange={expenseChanged}
+                                    value={expense}
+                                    setValue={setExpense} />
+                            </Grid>
                         </Grid>
                     </TabPanel>
                     <TabPanel>
-                       <Grid container spaceing={1} style={Styles.gridContainer}>
+                        <Grid container spaceing={1} style={Styles.gridContainer}>
                             <Grid item xs={12} style={Styles.gridSectionTitle}>
                                 パートナーの情報を入れてください
                             </Grid>
@@ -133,7 +146,7 @@ const LifePlanSimulator = () => {
                         test
                     </TabPanel>
                     <TabPanel>
-                            <Grid item xs={12} style={Styles.gridSectionTitle}>
+                        <Grid item xs={12} style={Styles.gridSectionTitle}>
                             世帯の収入情報を入れてください
                         </Grid>
                         <Grid item xs={8}>
@@ -144,12 +157,9 @@ const LifePlanSimulator = () => {
                         </Grid>
                     </TabPanel>
                     <TabPanel>
-                        <Grid item xs={8}>
-                            <ValueInput title='asset'
-                                onChange={assetChanged}
-                                value={asset}
-                                setValue={setAsset} />
-                        </Grid>
+                    </TabPanel>
+                    <TabPanel>
+
 
                     </TabPanel>
                 </Tabs>
