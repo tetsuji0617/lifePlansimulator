@@ -67,6 +67,7 @@ public class LifeSimulatorApiController {
 		System.out.println("health insurance:" + healthInsurance);
 		System.out.println("welfare Pension :" + weelfarePension);
 
+		//
 		int salaryDeducation = salaryDeductionCalc.calc(salary.intValue());
 		System.out.println("Salary Deducation; " + salaryDeducation);
 		int incomeTax = incomeTaxCalc.calc(salary.subtract(new BigDecimal(salaryDeducation)).subtract(weelfarePension).subtract(healthInsurance).subtract(new BigDecimal(480000)).intValue());
