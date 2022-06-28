@@ -52,6 +52,7 @@ public class LifeSimulatorApiController {
         //Calendarの日付をSimpleDateFormatで指定した書式で文字列に変換
         System.out.println(sdf.format(cal.getTime()));
 
+        // inputの数値項目をint/Decimalに置き換える
         int householdAge = Integer.valueOf(input.getAge());
         int lifeOfTheHeadOfHousehold = 100;
 		int retirementAge = 60;
@@ -67,6 +68,12 @@ public class LifeSimulatorApiController {
 		System.out.println("health insurance:" + healthInsurance);
 		System.out.println("welfare Pension :" + weelfarePension);
 
+		// イベント処理のインプットを作成する。
+		// TODO インプット処理を作成
+		
+		// イベント処理
+		// イベント処理（①退職まで→②完全リタイアまで→③リタイア後）
+		//　TODO イベント処理サービスを作成し、インプットをもとにライフプランを生成する。
 		int salaryDeducation = salaryDeductionCalc.calc(salary.intValue());
 		System.out.println("Salary Deducation; " + salaryDeducation);
 		int incomeTax = incomeTaxCalc.calc(salary.subtract(new BigDecimal(salaryDeducation)).subtract(weelfarePension).subtract(healthInsurance).subtract(new BigDecimal(480000)).intValue());
@@ -124,8 +131,8 @@ public class LifeSimulatorApiController {
 	}
 
 	BigDecimal getHealthInsuranceDeducation(BigDecimal salary, BigDecimal healthInsuranceRate) {
-		return salary.multiply(healthInsuranceRate).divide(NumberUtil.stringToDecimal(2))
-				.divide(NumberUtil.stringToDecimal(100));
+		return salary.multiply(healthInsuranceRate).divide(NumberUtil.intToDecimal(2))
+				.divide(NumberUtil.intToDecimal(100));
 	}
 
 	BigDecimal getHealthInsuranceDeducation(int salary, BigDecimal healthInsuranceRate) {

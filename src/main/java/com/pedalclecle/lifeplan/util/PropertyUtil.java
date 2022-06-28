@@ -7,10 +7,23 @@ import java.util.Properties;
 
 import org.springframework.util.ResourceUtils;
 
+/**
+ * PropertyUtil
+ * @author tetsuji0617
+ *
+ */
 public class PropertyUtil {
 
+	/**
+	 * property in memory
+	 */
 	private static Properties properties;
 
+	/**
+	 * 初期化ブロック
+	 *
+	 * クラスパスからプロパティファイルを読み取りpropertiesに格納する
+	 */
 	static {
 		properties = new Properties();
 		try {
