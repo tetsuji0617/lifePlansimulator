@@ -7,9 +7,23 @@ import org.springframework.stereotype.Service;
 
 import com.pedalclecle.lifeplan.util.PropertyUtil;
 
+/**
+ * 所得税計算
+ *
+ * <pre>
+ * 所得税計算用モジュール
+ * </pre>
+ * @author tetsuji0617
+ *
+ */
 @Service
 public class IncomeTaxCalc implements LifePlanCalcInterface<Integer, Integer> {
 
+	/**
+	 * 所得税計算
+	 *
+	 * @param s 基礎控除後の所得
+	 */
 	@Override
 	public Integer calc(Integer s) {
 
