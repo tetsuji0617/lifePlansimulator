@@ -1,8 +1,8 @@
 package com.pedalclecle.lifeplan.service;
 
 /**
- * ライフ8プランシミュレータのイベント用のインタフェース
- * @author ttjsp
+ * ライフプランシミュレータのイベント用のインタフェース
+ * @author tetsuji0617
  *
  * @param <S> イベント用のインプット
  */
