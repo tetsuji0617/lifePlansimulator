@@ -25,6 +25,11 @@ import com.pedalclecle.lifeplan.service.SalaryDeductionCalc;
 import com.pedalclecle.lifeplan.util.NumberUtil;
 import com.pedalclecle.lifeplan.util.PropertyUtil;
 
+/**
+ * ライフプランシミュレータAPI
+ * @author tetsuji0617
+ *
+ */
 @RestController
 public class LifeSimulatorApiController {
 
@@ -70,7 +75,7 @@ public class LifeSimulatorApiController {
 
 		// イベント処理のインプットを作成する。
 		// TODO インプット処理を作成
-		
+
 		// イベント処理
 		// イベント処理（①退職まで→②完全リタイアまで→③リタイア後）
 		//　TODO イベント処理サービスを作成し、インプットをもとにライフプランを生成する。
@@ -130,15 +135,33 @@ public class LifeSimulatorApiController {
 		return json;
 	}
 
+	/**
+	 * 健康保険料計算
+	 * @param salary 給与額
+	 * @param healthInsuranceRate 健康保険料率(％)
+	 * @return 健康保険料額(年額)
+	 */
 	BigDecimal getHealthInsuranceDeducation(BigDecimal salary, BigDecimal healthInsuranceRate) {
 		return salary.multiply(healthInsuranceRate).divide(NumberUtil.intToDecimal(2))
 				.divide(NumberUtil.intToDecimal(100));
 	}
 
+	/**
+	 * 健康保険料計算
+	 * @param salary 給与額
+	 * @param healthInsuranceRate 健康保険料率(％)
+	 * @return 健康保険料額(年額)
+	 */
 	BigDecimal getHealthInsuranceDeducation(int salary, BigDecimal healthInsuranceRate) {
 		return getHealthInsuranceDeducation(new BigDecimal(salary), healthInsuranceRate);
 	}
 
+	/**
+	 * 健康保険料計算
+	 * @param salary 給与額
+	 * @param healthInsuranceRate 健康保険料率(％)
+	 * @return 健康保険料額(年額)
+	 */
 	BigDecimal getHealthInsuranceDeducation(int salary, int healthInsuranceRate) {
 		return getHealthInsuranceDeducation(salary, new BigDecimal(healthInsuranceRate));
 	}
